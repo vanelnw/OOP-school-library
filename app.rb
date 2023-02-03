@@ -107,7 +107,7 @@ class App
                 '5' => :create_rental,
                 '6' => :list_rentals, '7' => :exit }
 
-    puts " "
+    puts ' '
     puts 'Please select one of the following options:'
     options.each { |key, value| puts "#{key} - #{value.to_s.capitalize.tr('_', ' ')}" }
 

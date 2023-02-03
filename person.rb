@@ -17,6 +17,7 @@ class Person < Nameable
     @parent_permission = parent_permission
     @rentals = []
   end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   private
 
