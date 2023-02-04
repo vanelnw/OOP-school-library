@@ -42,7 +42,7 @@ class App
     print 'Do you want to create a student (1) or teacher (2)? [Input the number] : '
     type = gets.chomp
     print 'Age: '
-    age = gets.chomp.to_i
+    gets.chomp.to_i
     print 'Name: '
     name = gets.chomp
 
