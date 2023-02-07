@@ -19,23 +19,36 @@ class PersonManager
     end
   end
 
-  def create_person
+  def gets_person_infos
     print 'Do you want to create a student (1) or teacher (2)? [Input the number] : '
     type = gets.chomp
     print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
     name = gets.chomp
+    [type, age, name]
+  end
 
-    case type
+  def gets_parent_permission
+    print 'Has parent permission? [Y/N]: '
+    gets.chomp == 'y'
+  end
+
+  def gets_specialization
+    print 'Specialization: '
+    gets.chomp
+  end
+
+  def create_person
+    infos = gets_person_infos
+
+    case infos[0]
     when '1'
-      print 'Has parent permission? [Y/N]: '
-      parent_permission = gets.chomp == 'y'
-      person = Student.new('classroom', age, name, parent_permission)
+      parent_permission = gets_parent_permission
+      person = Student.new('classroom', infos[1], infos[2], parent_permission)
     when '2'
-      print 'Specialization: '
-      specialization = gets.chomp
-      person = Teacher.new(age, specialization, name)
+      specialization = gets_specialization
+      person = Teacher.new(infos[1], specialization, infos[2])
     end
 
     @people << person

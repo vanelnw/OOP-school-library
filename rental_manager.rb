@@ -17,13 +17,15 @@ class RentalManager
     end
   end
 
-  def create_rental(books, people)
+  def gets_book(books)
     puts 'Select abook from the following by number'
     books.each_with_index { |book, index| puts " #{index})  Title: #{book.title} , Author: #{book.author}" }
 
     book_index = gets.chomp.to_i
-    book = books[book_index]
+    books[book_index]
+  end
 
+  def gets_person(people)
     puts 'select a person from the following list by number (not id)'
     people.each_with_index do |person, index|
       case person
@@ -35,10 +37,19 @@ class RentalManager
     end
 
     person_index = gets.chomp.to_i
-    person = people[person_index]
+    people[person_index]
+  end
 
+  def gets_date
     print 'Date (YYYY-MM-DD): '
-    date = gets.chomp
+    gets.chomp
+  end
+
+  def create_rental(books, people)
+    book = gets_book(books)
+    person = gets_person(people)
+    date = gets_date
+
     @rentals << Rental.new(date, book, person)
     puts 'Rental created.'
   end

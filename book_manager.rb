@@ -13,12 +13,17 @@ class BookManager
     end
   end
 
-  def create_book
+  def gets_book_details
     print 'Title: '
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
-    @books << Book.new(title, author)
+    [title, author]
+  end
+
+  def create_book
+    book_details = gets_book_details
+    @books << Book.new(book_details[0], book_details[1])
     puts 'Book created successfully'
   end
 end
