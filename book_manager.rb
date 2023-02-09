@@ -1,3 +1,4 @@
+require 'json'
 require './book'
 
 class BookManager
@@ -5,6 +6,19 @@ class BookManager
 
   def initialize
     @books = []
+
+    File.open('books.json', 'a+') do |f|
+      bookss = f.read
+      @books = if bookss.empty?
+                 []
+               else
+                 JSON.parse(bookss, create_additions: true)
+               end
+    end
+  end
+
+  def insert_book_to_file
+    File.write('books.json', JSON.dump(@books))
   end
 
   def list_books
@@ -25,5 +39,6 @@ class BookManager
     book_details = gets_book_details
     @books << Book.new(book_details[0], book_details[1])
     puts 'Book created successfully'
+    insert_book_to_file
   end
 end
