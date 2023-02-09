@@ -6,6 +6,19 @@ class PersonManager
 
   def initialize
     @people = []
+
+    File.open('people.json', 'a+') do |f|
+      persons = f.read
+      @people = if persons.empty?
+                  []
+                else
+                  JSON.parse(persons, create_additions: true)
+                end
+    end
+  end
+
+  def insert_person_to_file
+    File.write('people.json', JSON.dump(@people))
   end
 
   def list_persons
@@ -52,6 +65,7 @@ class PersonManager
     end
 
     @people << person
+    insert_person_to_file
     puts 'Person created successfully'
   end
 end
