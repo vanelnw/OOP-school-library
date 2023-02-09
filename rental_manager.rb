@@ -14,10 +14,6 @@ class RentalManager
     end
   end
 
-  def insert_rental_to_file
-    File.write('rentals.json', JSON.dump(@rentals))
-  end
-
   def list_rentals
     print 'ID of person: '
     person_id = gets.chomp.to_i
@@ -64,7 +60,6 @@ class RentalManager
     date = gets_date
 
     @rentals << Rental.new(date, book, person)
-    insert_rental_to_file
     puts 'Rental created.'
   end
 end

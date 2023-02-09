@@ -17,10 +17,6 @@ class PersonManager
     end
   end
 
-  def insert_person_to_file
-    File.write('people.json', JSON.dump(@people))
-  end
-
   def list_persons
     @people.each do |person|
       case person
@@ -65,7 +61,6 @@ class PersonManager
     end
 
     @people << person
-    insert_person_to_file
     puts 'Person created successfully'
   end
 end

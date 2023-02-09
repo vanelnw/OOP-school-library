@@ -14,6 +14,10 @@ class App
     @rentals = RentalManager.new
   end
 
+  def save_data(class_name, object)
+    File.write("#{class_name}.json", JSON.dump(object))
+  end
+
   def process_action(option)
     options = {
       '1' => proc { @books.list_books },
@@ -22,7 +26,12 @@ class App
       '4' => proc { @books.create_book },
       '5' => proc { @rentals.create_rental(@books.books, @peoples.people) },
       '6' => proc { @rentals.list_rentals },
-      '7' => proc { exit }
+      '7' => proc {
+               save_data('books', @books.books)
+               save_data('people', @peoples.people)
+               save_data('rentals', @rentals.rentals)
+               exit
+             }
     }
 
     if options.key?(option)
